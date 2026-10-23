@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4f6ed" />
+  <title>Habit Garden — Grow a Little Every Day</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Habit Garden home">
+        <span class="brand-mark">✿</span><span>habit<span class="brand-light">garden</span></span>
+      </a>
+      <div class="garden-profile">
+        <div class="avatar">🌱</div>
+        <div><strong>My little garden</strong><small>Your growth space</small></div>
+      </div>
+      <nav class="nav">
+        <p class="nav-label">WORKSPACE</p>
+        <button class="nav-item active" data-view="overview"><span>◫</span> Overview</button>
+        <button class="nav-item" data-view="habits"><span>✿</span> My habits <span class="nav-count" id="navHabitCount">0</span></button>
+        <button class="nav-item" data-view="calendar"><span>▦</span> Calendar</button>
+        <button class="nav-item" data-view="insights"><span>↗</span> Insights</button>
+      </nav>
+      <div class="sidebar-garden">
+        <div class="mini-plant">🌿</div>
+        <strong>Small steps, big growth.</strong>
+        <p>Every little action helps your garden bloom.</p>
+        <div class="growth-track"><span id="sidebarGrowth"></span></div>
+        <small id="sidebarGrowthText">0% of today's garden grown</small>
+      </div>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Your garden is growing <button id="themeToggle" title="Toggle theme" aria-label="Toggle theme">◐</button></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="breadcrumb">Workspace <span>/</span> <strong id="pageLabel">Overview</strong></div>
+        <div class="top-actions"><span class="today-chip" id="dateChip">Today</span><button class="icon-button" id="quickAdd" title="Add a habit">＋</button><div class="user-avatar">F</div></div>
+      </header>
+
+      <section class="page-view active" id="view-overview">
+        <div class="welcome-row">
+          <div><p class="eyebrow">YOUR PERSONAL GROWTH SPACE</p><h1>Good things take <em>time.</em> <span>☀️</span></h1><p class="subheading" id="welcomeText">Water your habits today and watch your garden grow.</p></div>
+          <div class="date-card"><span class="date-flower">✿</span><div><small>TODAY'S DATE</small><strong id="fullDate">Today</strong></div></div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon green">✿</span><span class="stat-note">Today</span></div><p>Daily completion</p><div class="stat-value"><strong id="completionStat">0%</strong><span class="stat-sub" id="completionSub">Let's get started</span></div><div class="thin-track"><span id="completionBar"></span></div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon peach">🔥</span><span class="stat-note">Personal best</span></div><p>Current best streak</p><div class="stat-value"><strong id="streakStat">0 <small>days</small></strong><span class="stat-sub">Keep showing up</span></div><div class="streak-dots" id="streakDots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon lavender">🌱</span><span class="stat-note">All time</span></div><p>Habits completed</p><div class="stat-value"><strong id="completedStat">0</strong><span class="stat-sub">little wins add up</span></div><div class="stat-decoration">✦ ✿ ✦</div></article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel habits-panel">
+            <div class="panel-heading"><div><p class="eyebrow">MAKE TODAY COUNT</p><h2>Today's habits <span class="heading-count" id="todayCount">0/0</span></h2></div><button class="text-button" data-goto="habits">View all <span>↗</span></button></div>
+            <div class="habit-list" id="todayHabitList"></div>
+            <button class="add-habit-row" id="addHabitInline"><span>＋</span> Add a new habit</button>
+          </section>
+          <section class="panel garden-panel">
+            <div class="panel-heading"><div><p class="eyebrow">YOUR PROGRESS, IN BLOOM</p><h2>Today's garden</h2></div><span class="season-pill"><span class="status-dot"></span> Growing</span></div>
+            <div class="garden-scene" id="gardenScene">
+              <div class="sun-glow"></div><div class="sun">☼</div><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div>
+              <div class="garden-ground"></div><div class="garden-plants" id="gardenPlants"><span class="plant plant-a">🌱</span><span class="plant plant-b">🌿</span><span class="plant plant-c">🌷</span><span class="plant plant-d">🌼</span><span class="plant plant-e">🌱</span></div>
+              <div class="garden-butterfly">✦</div>
+            </div>
+            <div class="garden-caption"><div><strong id="gardenMood">A fresh start</strong><small id="gardenMessage">Your garden is waiting for its first drop of water.</small></div><strong class="garden-percent" id="gardenPercent">0%</strong></div>
+            <div class="garden-progress"><span id="gardenProgress"></span></div>
+            <div class="garden-legend"><span><i class="legend-dot done"></i> Completed</span><span><i class="legend-dot pending"></i> Still growing</span></div>
+          </section>
+        </div>
+
+        <section class="panel week-panel">
+          <div class="panel-heading"><div><p class="eyebrow">CONSISTENCY OVER PERFECTION</p><h2>Your week at a glance</h2></div><span class="week-label">Last 7 days</span></div>
+          <div class="week-chart" id="weekChart"></div>
+        </section>
+      </section>
+
+      <section class="page-view" id="view-habits">
+        <div class="page-title-row"><div><p class="eyebrow">YOUR DAILY RITUALS</p><h1>My <em>habits.</em></h1><p class="subheading">Build routines that help you become who you want to be.</p></div><button class="primary-button" id="addHabitButton">＋ Create habit</button></div>
+        <div class="filter-row"><div class="filter-pills" id="habitFilters"><button class="filter-pill active" data-filter="all">All habits</button><button class="filter-pill" data-filter="pending">In progress</button><button class="filter-pill" data-filter="completed">Completed today</button></div><span class="result-count" id="habitResultCount">0 habits</span></div>
+        <div class="all-habits-grid" id="allHabitsGrid"></div>
+      </section>
+
+      <section class="page-view" id="view-calendar">
+        <div class="page-title-row"><div><p class="eyebrow">SHOW UP FOR YOURSELF</p><h1>Your <em>calendar.</em></h1><p class="subheading">Every checkmark is a little promise kept.</p></div><div class="calendar-controls"><button class="icon-button" id="prevMonth">‹</button><strong id="monthLabel">Month Year</strong><button class="icon-button" id="nextMonth">›</button></div></div>
+        <div class="panel calendar-panel"><div class="calendar-weekdays"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div class="calendar-grid" id="calendarGrid"></div><div class="calendar-legend"><span><i class="legend-dot done"></i> Habit completed</span><span><i class="legend-dot pending"></i> No activity yet</span></div></div>
+      </section>
+
+      <section class="page-view" id="view-insights">
+        <div class="page-title-row"><div><p class="eyebrow">NOTICE HOW FAR YOU'VE COME</p><h1>Your <em>insights.</em></h1><p class="subheading">Progress isn't always loud. Sometimes it's just showing up again.</p></div></div>
+        <div class="insights-grid">
+          <article class="panel insight-feature"><span class="stat-icon green">✿</span><p>Overall completion</p><strong id="insightCompletion">0%</strong><div class="thin-track"><span id="insightCompletionBar"></span></div><small>Today's completed habits</small></article>
+          <article class="panel insight-feature"><span class="stat-icon peach">🔥</span><p>Best current streak</p><strong id="insightStreak">0 days</strong><small>Keep your momentum alive</small></article>
+          <article class="panel insight-feature"><span class="stat-icon lavender">🌼</span><p>Total check-ins</p><strong id="insightCheckins">0</strong><small>Every completed habit counts</small></article>
+        </div>
+        <section class="panel"><div class="panel-heading"><div><p class="eyebrow">YOUR ROUTINE MIX</p><h2>Habits by category</h2></div></div><div id="categoryInsights" class="category-insights"></div></section>
+        <div class="gentle-note"><span>🌿</span><div><strong>Remember: progress over perfection.</strong><p>Missing a day doesn't erase your growth. Begin again, one small step at a time.</p></div></div>
+      </section>
+
+      <footer class="footer"><span>✿ habitgarden</span><span>Grow a little every day.</span><button id="resetDemo">Reset demo data</button></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="habitModal" aria-hidden="true">
+    <form class="modal" id="habitForm">
+      <div class="modal-header"><div><p class="eyebrow">PLANT A NEW SEED</p><h2 id="modalTitle">Create a habit</h2></div><button type="button" class="modal-close" id="closeModal" aria-label="Close">×</button></div>
+      <label for="habitName">Habit name</label><input id="habitName" name="habitName" maxlength="48" placeholder="e.g. Read for 15 minutes" required />
+      <div class="form-two"><div><label for="habitCategory">Category</label><select id="habitCategory"><option>Mindfulness</option><option>Health</option><option>Learning</option><option>Productivity</option><option>Self-care</option><option>Fitness</option></select></div><div><label for="habitTime">Best time</label><select id="habitTime"><option>Morning</option><option>Afternoon</option><option>Evening</option><option>Anytime</option></select></div></div>
+      <label>Choose an icon</label><div class="icon-picker" id="iconPicker"><button type="button" class="chosen" data-icon="🌱">🌱</button><button type="button" data-icon="💧">💧</button><button type="button" data-icon="📚">📚</button><button type="button" data-icon="🧘">🧘</button><button type="button" data-icon="🏃">🏃</button><button type="button" data-icon="✍️">✍️</button><button type="button" data-icon="🥗">🥗</button><button type="button" data-icon="🌙">🌙</button></div>
+      <div class="modal-actions"><button type="button" class="secondary-button" id="cancelModal">Cancel</button><button type="submit" class="primary-button">Save habit <span>↗</span></button></div>
+    </form>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
